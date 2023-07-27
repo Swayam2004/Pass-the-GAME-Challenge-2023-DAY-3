@@ -51,8 +51,8 @@ public class InventoryUIScript : MonoBehaviour
         //Set the sprite of the inventory slot to the sprite it ought to be based on the ID.
         for(int i = 0; i < inventorySize; i++)
         {
-            if (manager.inventory[i].amount > 1)
-                inventoryAmounts[i].text = manager.inventory[i].amount.ToString();
+            if (manager.inventory[i].Amount > 1)
+                inventoryAmounts[i].text = manager.inventory[i].Amount.ToString();
             else
                 inventoryAmounts[i].text = "";
             try

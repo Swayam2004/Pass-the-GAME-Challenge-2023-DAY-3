@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item
 {
     /**
      * Item IDs:
@@ -11,14 +11,15 @@ public class Item : MonoBehaviour
      * 2 = watering can
      * 3 = corn seed
      **/
-    public short ID, amount;
+    public short ID, Amount;
+
     public Item(short i, short a)
     {
         ID = i;
-        amount = a;
+        Amount = a;
 
         //If the amount is 0, the item automatically turns into air.
-        if(amount == 0)
+        if(Amount == 0)
         {
             ID = 0;
         }

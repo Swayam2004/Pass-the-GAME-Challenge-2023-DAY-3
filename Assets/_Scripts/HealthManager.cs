@@ -9,18 +9,11 @@ public class HealthManager : MonoBehaviour
     public Image healthBar;
     public float healthAmount = 100f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (healthAmount <= 0)
         {
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         if (Input.GetKeyDown(KeyCode.Return))

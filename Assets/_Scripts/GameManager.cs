@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
         {
             if(inventory[i].ID == item.ID)
             {
-                inventory[i].amount += item.amount;
+                inventory[i].Amount += item.Amount;
                 inventoryUI.UpdateInventory();
                 return true;
             }
@@ -242,10 +242,10 @@ public class GameManager : MonoBehaviour
     public bool RemoveItem(short inventoryIndex, short amount = 1)
     {
        
-        if(inventory[inventoryIndex].amount - amount >= 0)
+        if(inventory[inventoryIndex].Amount - amount >= 0)
         {
-            inventory[inventoryIndex].amount -= amount;
-            if(inventory[inventoryIndex].amount == 0)
+            inventory[inventoryIndex].Amount -= amount;
+            if(inventory[inventoryIndex].Amount == 0)
             {
                 inventory[inventoryIndex].ID = 0;
                 inventoryIDs[inventoryIndex] = 0;

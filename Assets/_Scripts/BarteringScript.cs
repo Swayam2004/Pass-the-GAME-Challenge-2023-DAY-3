@@ -12,13 +12,15 @@ public class BarteringScript : MonoBehaviour
     {
         if(manager == null)
         {
-            manager = (GameManager)FindObjectOfType(typeof(GameManager));
+            manager = GameManager.Instance;
+
             for(int i = 0; i < manager.inventory.Count; i++)
             {
                 items.Add(Instantiate(itemPrefab, layoutGroup.transform).GetComponent<BarterItemScript>());
                 items[i].sprite = manager.itemSprites[manager.inventory[i].ID];
             }
         }
+
         if(Input.GetKeyDown(KeyCode.E))
         {
             manager.StopBartering();

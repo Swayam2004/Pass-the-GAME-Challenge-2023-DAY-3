@@ -69,7 +69,7 @@ public class DialogueManagerScript : MonoBehaviour
     {
         for (int i = 0; i < dialogues.Length; i++)
         {
-            switch (dialogues[i].eventIndex)
+            switch (dialogues[i].EventIndex)
             {
                 case 0:
                     break;
@@ -96,7 +96,7 @@ public class DialogueManagerScript : MonoBehaviour
                     manager.AddItem(new Item(3, 5));
                     break;
             }
-            if(dialogues[i].line != "")
+            if(dialogues[i].Line != "")
                 image.color = new Color(1, 1, 1, 1);
             yield return StartCoroutine(WriteDialogue(dialogues[i]));
         }
@@ -110,30 +110,30 @@ public class DialogueManagerScript : MonoBehaviour
         text.text = "";
         string writtenDialogue = "";
         yield return new WaitForFixedUpdate();
-        for(int i = 0; i < dialogue.line.Length; i++)
+        for(int i = 0; i < dialogue.Line.Length; i++)
         {
             for (int j = 0; j < textDelay; j++)
             {
                 if(skipLine)
                 {
-                    writtenDialogue = dialogue.line;
-                    i = dialogue.line.Length;
+                    writtenDialogue = dialogue.Line;
+                    i = dialogue.Line.Length;
                 }
 
                 yield return new WaitForFixedUpdate();
             }
-            if (i < dialogue.line.Length)
+            if (i < dialogue.Line.Length)
             {
-                writtenDialogue += dialogue.line[i];
+                writtenDialogue += dialogue.Line[i];
                 text.text = writtenDialogue;
-                if (dialogue.line[i] == '.' || dialogue.line[i] == ',' || dialogue.line[i] == '?' || dialogue.line[i] == '!')
+                if (dialogue.Line[i] == '.' || dialogue.Line[i] == ',' || dialogue.Line[i] == '?' || dialogue.Line[i] == '!')
                 {
                     for (int k = 0; k < textDelay; k++)
                     {
                         if (skipLine)
                         {
-                            writtenDialogue = dialogue.line;
-                            i = dialogue.line.Length;
+                            writtenDialogue = dialogue.Line;
+                            i = dialogue.Line.Length;
                         }
                         yield return new WaitForFixedUpdate();
                     }

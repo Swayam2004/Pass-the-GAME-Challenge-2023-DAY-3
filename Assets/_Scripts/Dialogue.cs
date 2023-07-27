@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dialogue : MonoBehaviour
+public class Dialogue
 {
     /**
      * Speakers:
@@ -18,12 +18,13 @@ public class Dialogue : MonoBehaviour
      * 6 = Give the player 5 corn seeds.
      **/
 
-    public string line;
-    public short speaker, eventIndex;
+    public string Line;
+    public short Speaker, EventIndex;
+
     public Dialogue(string l, short s, short e = 0)
     {
-        line = l;
-        speaker = s;
-        eventIndex = e;
+        Line = l;
+        Speaker = s;
+        EventIndex = e;
     }
 }
