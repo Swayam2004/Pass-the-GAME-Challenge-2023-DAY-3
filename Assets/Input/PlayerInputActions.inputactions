@@ -1,5 +1,5 @@
 {
-    "name": "PlayerActionsMap",
+    "name": "PlayerInputActions",
     "maps": [
         {
             "name": "Player",
@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SkipText",
+                    "type": "Button",
+                    "id": "b08ae5bf-140b-473e-8b7d-f4f149d0e1c1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -125,6 +134,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c268ddef-dceb-4adb-bb0a-5471abc9c862",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipText",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "06b5d103-1bc6-4040-b0cb-9c930dcc65e3",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipText",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine;
 public class GameInput : MonoBehaviour
 {
     public static GameInput Instance { get; private set; }
+
+    public event EventHandler OnSkipTextActionStart;
+    public event EventHandler OnSkipTextActionEnd;
 
     private PlayerInputActions _playerInputActions;
 
@@ -21,6 +25,19 @@ public class GameInput : MonoBehaviour
         _playerInputActions = new PlayerInputActions();
 
         _playerInputActions.Player.Enable();
+
+        _playerInputActions.Player.SkipText.started += SkipText_started;
+        _playerInputActions.Player.SkipText.canceled += SkipText_canceled;
+    }
+
+    private void SkipText_started(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSkipTextActionStart?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SkipText_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSkipTextActionEnd?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnDestroy()

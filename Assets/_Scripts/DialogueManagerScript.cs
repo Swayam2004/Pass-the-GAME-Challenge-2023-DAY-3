@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManagerScript : MonoBehaviour
 {
     [SerializeField]
-    private Text text;
+    private TextMeshProUGUI text;
     [SerializeField]
     private int textDelay;
     [SerializeField]
@@ -22,24 +23,10 @@ public class DialogueManagerScript : MonoBehaviour
 
     [SerializeField]
     private GameObject villain;
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-            skipLine = true;
-        if (Input.GetMouseButtonUp(0))
-            skipLine = false;
-    }
-
-    private void FixedUpdate()
-    {
-        villain.transform.localScale = new Vector3(1, VillainScaleY, 1);
-    }
-
     private void Awake()
     {
         cam = Camera.main;
-        manager = (GameManager)FindObjectOfType(typeof(GameManager));
+
         text.text = "";
         image.color = new Color(0, 0, 0, 0);
         Dialogue[] intro = new Dialogue[16];
@@ -63,6 +50,30 @@ public class DialogueManagerScript : MonoBehaviour
 
         StartCoroutine(StartDialogue(intro));
     }
+
+    private void Start()
+    {
+        GameInput.Instance.OnSkipTextActionStart += Instance_OnSkipTextActionStart;
+        GameInput.Instance.OnSkipTextActionEnd += Instance_OnSkipTextActionEnd; ;
+
+        manager = GameManager.Instance;
+    }
+
+    private void Instance_OnSkipTextActionStart(object sender, System.EventArgs e)
+    {
+        skipLine = true;
+    }
+
+    private void Instance_OnSkipTextActionEnd(object sender, System.EventArgs e)
+    {
+        skipLine = false;
+    }
+
+    private void FixedUpdate()
+    {
+        villain.transform.localScale = new Vector3(1, VillainScaleY, 1);
+    }
+
 
     //Write a sequence of dialogues to the dialogue box. Makes the dialogue box visible on the first line of dialogue that is not empty. Makes the dialogue box invisible when done.
     public IEnumerator StartDialogue(Dialogue[] dialogues)
@@ -93,7 +104,7 @@ public class DialogueManagerScript : MonoBehaviour
                     yield return StartCoroutine(MoveCam(new Vector2(0, 0)));
                     break;
                 case 6:
-                    manager.AddItem(new Item(3, 5));
+                     manager.AddItem(new Item(3, 5));
                     break;
             }
             if(dialogues[i].Line != "")
@@ -145,11 +156,11 @@ public class DialogueManagerScript : MonoBehaviour
         }
 
         //Awaits a click only if there is a line of dialogue.
-        while (!Input.GetMouseButtonDown(0) && text.text != "")
+        while (!(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)) && text.text != "")
         {
             yield return null;
         }
-        while (!Input.GetMouseButtonUp(0) && text.text != "")
+        while (!(Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) && text.text != "")
         {
             yield return null;
         }

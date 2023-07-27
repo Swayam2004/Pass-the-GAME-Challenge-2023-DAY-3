@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class InventoryUIScript : MonoBehaviour
     private GameObject prefabInventorySlot, prefabInventorySprite;
     private GameObject[] inventorySlots;
     private Image[] inventorySprites;
-    private Text[] inventoryAmounts;
+    private TextMeshProUGUI[] inventoryAmounts;
     private GameManager manager;
     private int inventorySize;
 
@@ -24,12 +25,12 @@ public class InventoryUIScript : MonoBehaviour
     {
         inventorySize = manager.inventory.Count;
         inventorySlots = new GameObject[inventorySize];
-        inventoryAmounts = new Text[inventorySize];
+        inventoryAmounts = new TextMeshProUGUI[inventorySize];
         inventorySprites = new Image[inventorySize];
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             inventorySlots[i] = Instantiate(prefabInventorySlot, transform);
-            inventoryAmounts[i] = inventorySlots[i].GetComponentInChildren<Text>();
+            inventoryAmounts[i] = inventorySlots[i].GetComponentInChildren<TextMeshProUGUI>();
             inventorySprites[i] = Instantiate(prefabInventorySprite, inventorySlots[i].transform).GetComponent<Image>();
         }
     }
